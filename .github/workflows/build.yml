@@ -1,0 +1,20 @@
+name: docker image build and push
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@master
+      - name: Build and push console
+        working-directory: .
+        run: |
+          docker login -u $env:USER -p $env:TOKEN
+          docker build 
+          docker image push fretje/crystalreportsruntime:latest
+          docker logout
+        env:
+          USER: ${{ secrets.DOCKER_HUB_USERNAME }}
+          TOKEN: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
