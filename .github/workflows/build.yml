@@ -12,8 +12,8 @@ jobs:
         working-directory: .
         run: |
           docker login -u $env:USER -p $env:TOKEN
-          docker build -t fretje/crystalreportsruntime:latest .
-          docker image push fretje/crystalreportsruntime:latest
+          docker build -t fretje/crystalreportsruntime:fromgithub .
+          docker image push fretje/crystalreportsruntime:fromgithub
           docker logout
         env:
           USER: ${{ secrets.DOCKER_HUB_USERNAME }}
