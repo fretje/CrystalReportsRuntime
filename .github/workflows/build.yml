@@ -7,15 +7,16 @@ jobs:
   build:
     runs-on: windows-2019
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout code
+        uses: actions/checkout@master
         with:
           lfs: true
-      - name: Build and push console
+      - name: Build and push to docker
         working-directory: .
         run: |
           docker login -u $env:USER -p $env:TOKEN
-          docker build -t fretje/crystalreportsruntime:fromgithub .
-          docker image push fretje/crystalreportsruntime:fromgithub
+          docker build -t fretje/crystalreportsruntime:latest .
+          docker image push fretje/crystalreportsruntime:latest
           docker logout
         env:
           USER: ${{ secrets.DOCKER_HUB_USERNAME }}
