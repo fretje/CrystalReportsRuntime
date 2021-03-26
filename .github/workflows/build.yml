@@ -13,6 +13,7 @@ jobs:
         run: |
           docker login -u $env:USER -p $env:TOKEN
           docker build .
+          docker tag fretje/crystalreportsruntime:latest
           docker image push fretje/crystalreportsruntime:latest
           docker logout
         env:
