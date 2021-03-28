@@ -1,4 +1,9 @@
-FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8-windowsservercore-ltsc2019
+# windowsservercore-1803 required as it has the fonts we need in the report in order to export to PDF
+FROM microsoft/iis:windowsservercore-1803
+
+# Install features we need
+RUN ["powershell.exe", "Install-WindowsFeature NET-Framework-45-ASPNET"]
+RUN ["powershell.exe", "Install-WindowsFeature Web-Asp-Net45"]
 
 # Hack in oledlg dll for crystal reports installer to work!
 COPY ./System32/oledlg.dll c:/windows/System32
