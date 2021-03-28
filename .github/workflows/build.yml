@@ -19,7 +19,7 @@ jobs:
         working-directory: .
         run: |
           docker login -u $env:USER -p $env:TOKEN
-          docker build -t fretje/crystalreportsruntime:latest .
+          docker build -t fretje/crystalreportsruntime:latest . --isolation=hyperv
           docker image push fretje/crystalreportsruntime:latest
           docker logout
         env:
